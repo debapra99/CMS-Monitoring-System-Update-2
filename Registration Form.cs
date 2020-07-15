@@ -8,223 +8,224 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+
+//Library Firebase untuk C# Language (dinamakan Firesharp)
 using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form3 : Form
+    public partial class Registrasi : Form
     {
-        public Form3()
+        public Registrasi()
         {
             InitializeComponent();
         }
+
+        //Program Drag Page
+        #region
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
+        #endregion
 
+        //Program konfigurasi awal Firesharp
+        #region
         IFirebaseConfig ifc = new FirebaseConfig()
         {
             AuthSecret = "KAjSZyGu9BbJeHscNyCVzSKnloCF91kNRWMuHYaP",
             BasePath = "https://idpassword-8d768.firebaseio.com/"
-
         };
-
         IFirebaseClient client;
-
+        private void MsgError(string msg)
+        {   
+            labelberhasil.Text = "  " + msg;
+            labelberhasil.Visible = true;   
+        }
         private void Form3_Load(object sender, EventArgs e)
         {
             try
             {
                 client = new FireSharp.FirebaseClient(ifc);
             }
-
             catch
             {
-                MessageBox.Show("Please check your internet connection");
+                MessageBox.Show("Tolong cek kembali koneksi internet anda");
             }
         }
+        #endregion
 
-        private void label1_Click(object sender, EventArgs e)
+        //Program sistem Registrasi
+        #region
+        private void Btnregis_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void lineShape1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnregis_Click(object sender, EventArgs e)
-        {
-            #region Condition
-            if (string.IsNullOrWhiteSpace(txtemail.Text) &&
-                string.IsNullOrWhiteSpace(txtnama.Text) &&
-                string.IsNullOrWhiteSpace(txttelepon.Text) &&
-                string.IsNullOrWhiteSpace(txtpass.Text) &&
-                string.IsNullOrWhiteSpace(txtrepass.Text))
+            if (txtnama.Text != "NAMA LENGKAP")
             {
-                MessageBox.Show("Tolong lengkapi formulir yang kosong");
-                return;
+                if (txtemail.Text != "EMAIL")
+                {
+                    if (txttelepon.Text != "NO TELEPON")
+                    {
+                        if (txtpass.Text != "PASSWORD")
+                        {
+                            MyUser user = new MyUser()
+                            {
+                                NamaLengkap = txtnama.Text,
+                                Email = txtemail.Text,
+                                NoTelepon = txttelepon.Text,
+                                Password = txtpass.Text
+                            };
+                            SetResponse set = client.Set(@"Users/" + txtnama.Text, user);                            
+                            MsgError("Berhasil Mendaftar !");
+                            labelberhasil.ForeColor = Color.Chartreuse;
+                        }
+                        else MsgError("Lengkapi Forms Pendaftaran !");                        
+                    }
+                    else MsgError("Lengkapi Forms Pendaftaran !");                    
+                }
+                else MsgError("Lengkapi Forms Pendaftaran !");                
             }
-            #endregion
-
-            MyUser user = new MyUser()
-            {
-
-                Email = txtemail.Text,
-                Nama = txtnama.Text,
-                Telepon = txttelepon.Text,
-                Password = txtpass.Text
-            };
-            SetResponse set = client.Set(@"Users/" + txtnama.Text, user);
-            MyUser ReUser = set.ResultAs<MyUser>();
-
-            MyUser CurUser = new MyUser()
-            {
-                Nama = txtnama.Text,
-                Email = txtemail.Text,
-                Telepon = txttelepon.Text,
-                Password = txtpass.Text
-
-
-            };
-            
+            else MsgError("Lengkapi Forms Pendaftaran !");            
         }
+        #endregion
 
-
-        private void button1_Click(object sender, EventArgs e)
+        //Program Konfigurasi Button, Linklabel, TextBox, Picture dan sebagainya
+        #region
+        private void Btnback_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 MainForm = new Form1();
-            MainForm.Show();
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
+            Form1 mainForm = new Form1();
+            mainForm.Show();
+        }     
+        private void PictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void PictureBox3_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void txtnama_Enter(object sender, EventArgs e)
+        private void Txtnama_Enter(object sender, EventArgs e)
         {
-            if (txtnama.Text == "Username")
+            if (txtnama.Text == "NAMA LENGKAP")
             {
                 txtnama.Text = "";
                 txtnama.ForeColor = Color.LightGray;
-            }
-            
+            }            
         }
-
-        private void txtnama_Leave(object sender, EventArgs e)
+        private void Txtnama_Leave(object sender, EventArgs e)
         {
             if (txtnama.Text == "")
             {
-                txtnama.Text = "Username";
+                txtnama.Text = "NAMA LENGKAP";
                 txtnama.ForeColor = Color.LightGray;
             }
         }
-
-        private void txtemail_Enter(object sender, EventArgs e)
+        private void Txtemail_Enter(object sender, EventArgs e)
         {
-            if (txtemail.Text == "Email")
+            if (txtemail.Text == "EMAIL")
             {
                 txtemail.Text = "";
                 txtemail.ForeColor = Color.LightGray;
             }
         }
-
-        private void txtemail_Leave(object sender, EventArgs e)
+        private void Txtemail_Leave(object sender, EventArgs e)
         {
             if (txtemail.Text == "")
             {
-                txtemail.Text = "Email";
+                txtemail.Text = "EMAIL";
                 txtemail.ForeColor = Color.LightGray;
             }
         }
-
-        private void txtnomor_Enter(object sender, EventArgs e)
+        private void Txtnomor_Enter(object sender, EventArgs e)
         {
-            if ( txttelepon.Text == "Nomor Telepon")
+            if ( txttelepon.Text == "NO TELEPON")
             {
                 txttelepon.Text = "";
                 txttelepon.ForeColor = Color.LightGray;
             }
         }
-
-        private void txtnomor_Leave(object sender, EventArgs e)
+        private void Txtnomor_Leave(object sender, EventArgs e)
         {
             if (txttelepon.Text == "")
             {
-                txttelepon.Text = "Nomor Telepon";
+                txttelepon.Text = "NO TELEPON";
                 txttelepon.ForeColor = Color.LightGray;
             }
         }
-
-        private void txtpass_Enter(object sender, EventArgs e)
+        private void Txtpass_Enter(object sender, EventArgs e)
         {
-            if (txtpass.Text == "Password")
+            if (txtpass.Text == "PASSWORD")
             {
                 txtpass.Text = "";
                 txtpass.ForeColor = Color.LightGray;
                 txtpass.UseSystemPasswordChar = true;
             }
         }
-
-        private void txtpass_Leave(object sender, EventArgs e)
+        private void Txtpass_Leave(object sender, EventArgs e)
         {
             if (txtpass.Text == "")
             {
-                txtpass.Text = "Password";
+                txtpass.Text = "PASSWORD";
                 txtpass.ForeColor = Color.LightGray;
                 txtpass.UseSystemPasswordChar = false;
             }
         }
-
-        private void txtrepass_Enter(object sender, EventArgs e)
+        private void Txtpasslagi_Enter(object sender, EventArgs e)
         {
-            if (txtrepass.Text == "Masukkan Kembali Password")
+            if(txtpasslagi.Text == "MASUKKAN KEMBALI PASSWORD")
             {
-                txtrepass.Text = "";
-                txtrepass.ForeColor = Color.LightGray;
-                txtrepass.UseSystemPasswordChar = true;
+                txtpasslagi.Text = "";
+                txtpasslagi.ForeColor = Color.LightGray;
+                txtpasslagi.UseSystemPasswordChar = true;
             }
         }
-
-        private void txtrepass_Leave(object sender, EventArgs e)
+        private void Txtpasslagi_Leave(object sender, EventArgs e)
         {
-            if (txtrepass.Text == "")
+            if(txtpasslagi.Text == "")
             {
-                txtrepass.Text = "Masukkan Kembali Password";
-                txtrepass.ForeColor = Color.LightGray;
-                txtrepass.UseSystemPasswordChar = false;
+                txtpasslagi.Text = "";
+                txtpasslagi.ForeColor = Color.LightGray;
+                txtpasslagi.UseSystemPasswordChar = false;
             }
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtpass_TextChanged(object sender, EventArgs e)
+       
+        private void Txtlagipass_TextChanged(object sender, EventArgs e)
         {
             
         }
+        private void Label1_Click(object sender, EventArgs e)
+        {
 
-        private void txtrepass_TextChanged(object sender, EventArgs e)
+        }
+
+        private void LineShape1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Txtrepass_TextChanged(object sender, EventArgs e)
         {
            
         }
+
+        private void Logoback_Click(object sender, EventArgs e)
+        {
+           
+        }
+        #endregion
     }
 }
+
+        
+    
+
