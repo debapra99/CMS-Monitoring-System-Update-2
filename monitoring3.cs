@@ -31,7 +31,7 @@ namespace WindowsFormsApp2
 
                 async void DocumentCostum()
                 {
-                    DocumentReference docref = database.Collection("DocumentCostum").Document("MyDoc");
+                    DocumentReference docref = database.Collection("KTAD-1").Document("SensorAndScaleTime");
                     DocumentSnapshot snap = await docref.GetSnapshotAsync();
                     if (snap.Exists)
                     {

@@ -79,6 +79,7 @@ namespace WindowsFormsApp2
                             SetResponse set = client.Set(@"Users/" + txtnama.Text, user);                            
                             MsgError("Berhasil Mendaftar !");
                             labelberhasil.ForeColor = Color.Chartreuse;
+                            
                         }
                         else MsgError("Lengkapi Forms Pendaftaran !");                        
                     }

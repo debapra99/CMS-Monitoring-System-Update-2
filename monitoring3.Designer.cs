@@ -223,7 +223,7 @@
             this.circularProgressBar3.SuperscriptMargin = new System.Windows.Forms.Padding(5, 30, 0, 0);
             this.circularProgressBar3.SuperscriptText = "%";
             this.circularProgressBar3.TabIndex = 64;
-            this.circularProgressBar3.Text = "68";
+            this.circularProgressBar3.Text = "0";
             this.circularProgressBar3.TextMargin = new System.Windows.Forms.Padding(3, 1, 5, 0);
             this.circularProgressBar3.Value = 68;
             // 
@@ -303,7 +303,7 @@
             this.cpbwaterlevel.SuperscriptMargin = new System.Windows.Forms.Padding(5, 30, 0, 0);
             this.cpbwaterlevel.SuperscriptText = "%";
             this.cpbwaterlevel.TabIndex = 64;
-            this.cpbwaterlevel.Text = "45";
+            this.cpbwaterlevel.Text = "0";
             this.cpbwaterlevel.TextMargin = new System.Windows.Forms.Padding(3, 1, 5, 0);
             this.cpbwaterlevel.Value = 45;
             // 
@@ -396,7 +396,7 @@
             this.cpbgenfuellevel.SuperscriptMargin = new System.Windows.Forms.Padding(5, 30, 0, 0);
             this.cpbgenfuellevel.SuperscriptText = "%";
             this.cpbgenfuellevel.TabIndex = 64;
-            this.cpbgenfuellevel.Text = "20";
+            this.cpbgenfuellevel.Text = "0";
             this.cpbgenfuellevel.TextMargin = new System.Windows.Forms.Padding(3, 1, 5, 0);
             this.cpbgenfuellevel.Value = 20;
             // 
@@ -410,6 +410,7 @@
             this.txtchillermonitoring3.Name = "txtchillermonitoring3";
             this.txtchillermonitoring3.Size = new System.Drawing.Size(112, 64);
             this.txtchillermonitoring3.TabIndex = 55;
+            this.txtchillermonitoring3.Text = "-6°C";
             this.txtchillermonitoring3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -662,6 +663,7 @@
             this.txtfreezermonitoring3.Name = "txtfreezermonitoring3";
             this.txtfreezermonitoring3.Size = new System.Drawing.Size(112, 64);
             this.txtfreezermonitoring3.TabIndex = 70;
+            this.txtfreezermonitoring3.Text = "3°C";
             this.txtfreezermonitoring3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
