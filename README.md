@@ -15,3 +15,5 @@ sebagai berikut :
  3. Tampilan Halaman Monitoring
 
 untuk keseluruhan tampilan User Interface dapat dilihat pada gambar dibawah ini :
+https://github.com/debapra99/CMS-Monitoring-System-Update-2/issues/1#issue-657916524
+Gambar 1. Halaman Monitoring
